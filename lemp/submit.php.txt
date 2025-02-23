@@ -1,0 +1,37 @@
+<?php
+// Database configuration
+$servername = "localhost"; // Change to your server if it's different
+$username = "root";        // MySQL username
+$password = "pass123";            // MySQL password
+$dbname = "user_data";     // Database name
+
+// Create a connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and assign form data to variables
+    $user_name = mysqli_real_escape_string($conn, $_POST['username']);
+    $user_password = mysqli_real_escape_string($conn, $_POST['password']);
+    $user_email = mysqli_real_escape_string($conn, $_POST['email']);
+
+
+
+    // Insert data into the database
+    $sql = "INSERT INTO users (username, password, email) VALUES ('$user_name', '$user_password', '$user_email')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close the connection
+    $conn->close();
+}
+?>
