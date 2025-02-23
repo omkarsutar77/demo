@@ -7,3 +7,4 @@ ALTER USER root@localhost identified by "pass123";   //create passwword and exit
 sudo mysql -u root -p       //login in mysql and create a table using mysql.txt
 create a form.html and submit.html    
 restart all services 
+//check 
